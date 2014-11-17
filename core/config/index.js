@@ -5,10 +5,7 @@ var path = require('path'),
 	sharedConfig;
 
 var sharedConfig = {
-	root: rootPath,
-	db : {
-		path: 'mongodb://localhost/hashtag-watcher'
-	}
+	root: rootPath
 };
 
 module.exports = {
@@ -18,7 +15,10 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - local'
 		},
-		twitter: require('./privconfig-twitter')['local'],
+		twitter: require('./privconfig-twitter').local,
+		db : {
+			path: 'mongodb://localhost/hashtag-watcher'
+		},
 		global: sharedConfig
 	},
 
@@ -28,7 +28,10 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - Dev'
 		},
-		twitter: require('./privconfig-twitter')['dev'],
+		twitter: require('./privconfig-twitter').dev,
+		db : {
+			path: 'mongodb://localhost/hashtag-watcher'
+		},
 		global: sharedConfig
 	},
 
@@ -38,7 +41,10 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - Prod'
 		},
-		twitter: require('./privconfig-twitter')['prod'],
+		twitter: require('./privconfig-twitter').prod,
+		db : {
+			path: process.env.MONGOLAB_URI
+		},
 		global: sharedConfig
 
 	},
