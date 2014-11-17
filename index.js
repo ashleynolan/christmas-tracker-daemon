@@ -2,6 +2,8 @@
  * Declare our Module dependencies at the top
  */
 
+require('newrelic'); //requires new relic
+
 var express = require('express'), //express - application framework for node
 	forever = require('forever-monitor');
 
