@@ -2,7 +2,8 @@
  * Declare our Module dependencies at the top
  */
 
-var express = require('express');	//express - application framework for node
+var express = require('express'), //express - application framework for node
+	forever = require('forever-monitor');
 
 
 //fixes long ../../ require calls

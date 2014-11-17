@@ -66,7 +66,7 @@ exports.getSymbolState = function (symbol) {
 
 		//and then for each hashtag
 		_.each(symbol.tags, function (tag, j) {
-			console.log('server/controllers/state :: getSymbolState :: ' + tag.tagname);
+			//console.log('server/controllers/state :: getSymbolState :: ' + tag.tagname);
 			tagStates.push(_this.getTagState(tag));
 		});
 

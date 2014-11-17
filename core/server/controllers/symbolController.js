@@ -3,15 +3,17 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-	, Promise = require('es6-promise').Promise
+var mongoose = require('mongoose'),
+	Promise = require('es6-promise').Promise,
 
-	, state = require('core/server/controllers/stateController')
+	state = require('core/server/controllers/stateController'),
 
-	, Symbol = mongoose.model('Symbol')
-	, State = mongoose.model('State')
-	, utils = require('lib/utils')
-	, _ = require('underscore'),
+	twitter = require('core/server/controllers/twitterApiLinkController'),
+
+	Symbol = mongoose.model('Symbol'),
+	State = mongoose.model('State'),
+	utils = require('lib/utils'),
+	_ = require('underscore'),
 	_this = this;
 
 
@@ -132,24 +134,11 @@ exports.display = function(req, res) {
 
 	console.log('questionController: Displaying page:');
 
-	Symbol.loadAll(function (err, symbols) {
-
-		state.getStates(symbols)
-		.then(
-			state.stateArrayToObject
-		)
-		.then(function (symbolObject) {
-
 			//console.log(symbolObject);
-
-			res.render('index', {
-				json: symbolObject
-			});
-
-		});
+	res.render('index', {
+		json: twitter.state.symbols
 	});
 
-	//_this.getAllSymbols(req, res);
 };
 
 
