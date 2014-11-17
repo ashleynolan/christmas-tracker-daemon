@@ -15,7 +15,7 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - local'
 		},
-		twitter: require('./privconfig-twitter').local,
+		twitter: require('./config-twitter').local,
 		db : {
 			path: 'mongodb://localhost/hashtag-watcher'
 		},
@@ -28,7 +28,7 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - Dev'
 		},
-		twitter: require('./privconfig-twitter').dev,
+		twitter: require('./config-twitter').dev,
 		db : {
 			path: 'mongodb://localhost/hashtag-watcher'
 		},
@@ -41,7 +41,7 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - Prod'
 		},
-		twitter: require('./privconfig-twitter').prod,
+		twitter: require('./config-twitter').prod,
 		db : {
 			path: process.env.MONGOLAB_URI
 		},
