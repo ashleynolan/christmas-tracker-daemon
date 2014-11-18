@@ -11,6 +11,9 @@
 	"bells" : {
 		"tags" : ["bell", "bells"]
 	},
+	"bingcrosby" : {
+		"tags" : ["bing crosby"]
+	},
 	"blitzen" : {
 		"tags" : ["blitzen"]
 	},
@@ -21,13 +24,16 @@
 		"tags" : ["candle", "candles"]
 	},
 	"carols" : {
-		"tags" : ["carols"]
+		"tags" : ["christmas carol", "carols", "carol singing"]
 	},
 	"christianity" : {
 		"tags" : ["christianity"]
 	},
 	"christmas" : {
 		"tags" : ["christmas", "xmas", "noel"]
+	},
+	"christmaslights" : {
+		"tags" : ["christmas lights"]
 	},
 	"christmastree" : {
 		"tags" : ["christmas tree"]
@@ -113,11 +119,14 @@
 	"lapland" : {
 		"tags" : ["lapland"]
 	},
-	"lights" : {
-		"tags" : ["lights"]
+	"love" : {
+		"tags" : ["love"]
 	},
 	"manger" : {
 		"tags" : ["manger"]
+	},
+	"mariahcarey" : {
+		"tags" : ["mariah carey"]
 	},
 	"mary" : {
 		"tags" : ["mary"]
@@ -143,6 +152,9 @@
 	"nativity" : {
 		"tags" : ["nativity"]
 	},
+	"northpole" : {
+		"tags" : ["north pole"]
+	},
 	"nutcracker" : {
 		"tags" : ["nutcracker"]
 	},
@@ -156,7 +168,7 @@
 		"tags" : ["prancer"]
 	},
 	"present" : {
-		"tags" : ["present", "gift"]
+		"tags" : ["present", "presents", "gift", "gifts"]
 	},
 	"pudding" : {
 		"tags" : ["pudding"]
@@ -165,7 +177,7 @@
 		"tags" : ["punch"]
 	},
 	"reindeer" : {
-		"tags" : ["reindeer", "reindeer"]
+		"tags" : ["reindeer", "reindeers"]
 	},
 	"roast" : {
 		"tags" : ["roast"]
@@ -180,7 +192,7 @@
 		"tags" : ["sack"]
 	},
 	"santa" : {
-		"tags" : ["santa", "father christmas"]
+		"tags" : ["santa", "father christmas", "Saint Nick", "Kriss Kringle", "Saint Nicholas"]
 	},
 	"sherry" : {
 		"tags" : ["sherry"]
@@ -195,19 +207,19 @@
 		"tags" : ["shepherd", "shepherds"]
 	},
 	"sledge" : {
-		"tags" : ["sledge"]
+		"tags" : ["sledge", "sledging"]
 	},
 	"sleigh" : {
 		"tags" : ["sleigh"]
 	},
 	"snow" : {
-		"tags" : ["snow"]
+		"tags" : ["snow", "snowing", "snowed"]
 	},
 	"snowflake" : {
 		"tags" : ["snowflake"]
 	},
 	"snowman" : {
-		"tags" : ["snowman"]
+		"tags" : ["snowman", "snowmen"]
 	},
 	"sprouts" : {
 		"tags" : ["sprout", "sprouts"]
@@ -224,6 +236,9 @@
 	"stuffing" : {
 		"tags" : ["stuffing"]
 	},
+	"thepogues" : {
+		"tags" : ["the pogues"]
+	},
 	"tinsel" : {
 		"tags" : ["tinsel"]
 	},
@@ -232,6 +247,9 @@
 	},
 	"vixen" : {
 		"tags" : ["vixen"]
+	},
+	"wham" : {
+		"tags" : ["wham"]
 	},
 	"wisemen" : {
 		"tags" : ["wisemen", "wise men"]
