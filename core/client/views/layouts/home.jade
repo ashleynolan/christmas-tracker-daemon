@@ -1,8 +1,7 @@
 doctype html
 html
-	include ../includes/head
-
 	block vars
+	include ../includes/head
 
 	- if (subText === undefined)
 		- subText = 'Oops'
@@ -15,10 +14,7 @@ html
 				p #{pageContent}
 
 			.symbols
-				each symbol, index in json
-					div(class="symbol symbol--#{index}")
-						p.symbol-label #{index} =&nbsp;
-							span.symbol-total #{symbol.total}
+				include ../symbols/index
 
 
 			include ../includes/footer

@@ -248,11 +248,11 @@ exports.updateState = function (newState, dbState, cb) {
 		//first save the state for yesterday before we switch
 		State.load(newState.id, 'yesterday', function (err, yestState) {
 
-			console.log('stateController :: updateState.js :: yesterday');
-
 			if (err === null) {
 				//update yesterdays final state
 				_this.updateState(newState, yestState, function() {
+					console.log('stateController :: updateState.js :: updated yesterdays state – creating new state for today');
+
 					newState.tagname = yestState.name;
 					newState._id = newState.id;
 					//create new state for today

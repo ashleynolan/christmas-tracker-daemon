@@ -16,10 +16,11 @@ var mongoose = require('mongoose'),
 
 	pkg = require('package.json'),
 
-	FAKE_TWITTER_CONNECTION = false,
+	FAKE_TWITTER_CONNECTION = true,
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,
+	STATE_SAVE_DURATION = 10000,
 
 	_this = this;
 
@@ -244,7 +245,7 @@ var TwitterController = {
 		//set to update every x seconds (set in constants at the top of this file)
 		setInterval(function () {
 			_self.saveState();
-		}, 5000);
+		}, STATE_SAVE_DURATION);
 	},
 
 	saveState : function () {
@@ -254,6 +255,7 @@ var TwitterController = {
 			console.log('State saved at ' + new Date());
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
+				console.log('Clearing local state – switching to new day');
 				_self.getLocalStateFromServer();
 			}
 		});

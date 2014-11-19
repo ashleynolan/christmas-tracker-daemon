@@ -1,8 +1,8 @@
 {
-  "name": "twitter-hashtag-watcher",
-  "title": "Twitter Hashtag Watcher",
-  "description": "Tracks and records a set of hashtags",
-  "url": "https://github.com/tmwagency/twitter-hashtag-watcher",
+  "name": "christmas-tracker",
+  "title": "Christmas Tracker",
+  "description": "Christmas Tracker – Tracks popular Christmas related words and phrases as they are mentioned on Twitter",
+  "url": "http://www.christmastracker.com",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -45,7 +45,7 @@
     "traversty": "^1.0.5",
     "uglifyify": "~2.5.0"
   },
-  "subdomain": "twitter-hashtag-watcher",
+  "subdomain": "christmastracker",
   "engines": {
     "node": "0.10.x"
   }

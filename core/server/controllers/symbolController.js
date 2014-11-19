@@ -132,11 +132,12 @@ exports.update = function (symbol, value, next) {
 
 exports.display = function(req, res) {
 
-	console.log('questionController: Displaying page:');
+	console.log('questionController: Displaying page');
 
-			//console.log(symbolObject);
+	console.log(twitter.state.symbols);
+
 	res.render('index', {
-		json: twitter.state.symbols
+		symbols: twitter.state.symbols
 	});
 
 };
