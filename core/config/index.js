@@ -5,7 +5,13 @@ var path = require('path'),
 	sharedConfig;
 
 var sharedConfig = {
-	root: rootPath
+	root: rootPath,
+	twitter: {
+		consumer_key: process.env.TWITTER_CONSUMER_KEY,
+		consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+		access_token_key: process.env.TWITTER_ACCESS_TOKEN,
+		access_token_secret: process.env.TWITTER_ACCESS_SECRET
+	}
 };
 
 module.exports = {
@@ -15,7 +21,6 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - local'
 		},
-		twitter: require('./config-twitter').local,
 		db : {
 			path: 'mongodb://localhost/hashtag-watcher'
 		},
@@ -28,7 +33,6 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - Dev'
 		},
-		twitter: require('./config-twitter').dev,
 		db : {
 			path: 'mongodb://localhost/hashtag-watcher'
 		},
@@ -41,7 +45,6 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - Prod'
 		},
-		twitter: require('./config-twitter').prod,
 		db : {
 			path: process.env.MONGOLAB_URI
 		},

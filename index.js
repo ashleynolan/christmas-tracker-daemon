@@ -7,7 +7,6 @@ require('newrelic'); //requires new relic
 var express = require('express'), //express - application framework for node
 	forever = require('forever-monitor');
 
-
 //fixes long ../../ require calls
 //https://gist.github.com/branneman/8048520
 process.env.NODE_PATH = '.';

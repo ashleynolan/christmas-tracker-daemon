@@ -16,7 +16,7 @@ var mongoose = require('mongoose'),
 
 	pkg = require('package.json'),
 
-	FAKE_TWITTER_CONNECTION = false,
+	FAKE_TWITTER_CONNECTION = process.env.FAKE_TWITTER_CONNECTION || false,
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,
@@ -49,9 +49,11 @@ var TwitterController = {
 	 */
 	init : function (socketServer, config) {
 
+		console.log(process.env.FAKE_TWITTER_CONNECTION);
+
 		SocketServer = socketServer; //assigning passed instance of our socket connection to use when we need to emit
 
-		_self.twitterStreamingApi = new twitter(config.twitter); //Instantiate the twitterStreamingAPI component
+		_self.twitterStreamingApi = new twitter(config.global.twitter); //Instantiate the twitterStreamingAPI component
 
 		return TwitterController;
 
@@ -77,6 +79,8 @@ var TwitterController = {
 		//
 		// This is to stop us getting blocked by Twitter when we’re changing our node server during development
 		if (FAKE_TWITTER_CONNECTION) {
+
+			console.log('FAKE STREAM');
 
 			fs.readFile('core/server/test/tweets.json', function (err, data) {
 				if (err) throw err;
