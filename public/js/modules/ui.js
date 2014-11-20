@@ -5,7 +5,11 @@
 
 // dependencies for this module go here
 var $ = require('traversty'),
-	qwery = require('qwery');
+	qwery = require('qwery'),
+
+	d3 = require('d3');
+
+
 
 //give us old IE selector support (<8)
 $.setSelectorEngine(qwery);
@@ -13,6 +17,11 @@ $.setSelectorEngine(qwery);
 var UI = {
 	init : function () {
 		console.debug('KO.UI module is being initialised');
+
+		// d3.selectAll(".symbol").style("color", function() {
+  // 			return "hsl(" + Math.random() * 360 + ",100%,50%)";
+		// });
+
 	},
 
 

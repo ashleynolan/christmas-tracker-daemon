@@ -16,7 +16,7 @@ var mongoose = require('mongoose'),
 
 	pkg = require('package.json'),
 
-	FAKE_TWITTER_CONNECTION = true,
+	FAKE_TWITTER_CONNECTION = false,
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,

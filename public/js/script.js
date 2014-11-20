@@ -12,7 +12,8 @@
 require("./helpers/log");
 require("./helpers/shims");
 
-var Sockets = require('./modules/sockets');
+var Sockets = require('./modules/sockets'),
+	UI = require('./modules/ui');
 
 
 //initialise KO object
@@ -21,8 +22,7 @@ var KO = {};
 KO.Config = {
 
 	init : function () {
-
-		log('running');
+		UI.init();
 		Sockets.init();
 	}
 };
