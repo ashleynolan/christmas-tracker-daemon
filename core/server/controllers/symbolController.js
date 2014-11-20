@@ -134,7 +134,7 @@ exports.display = function(req, res) {
 
 	console.log('questionController: Displaying page');
 
-	console.log(twitter.state.symbols);
+	//console.log(twitter.state.symbols);
 
 	res.render('index', {
 		symbols: twitter.state.symbols
