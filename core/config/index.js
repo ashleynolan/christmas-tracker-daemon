@@ -15,7 +15,7 @@ module.exports = {
 		app: {
 			name: 'Twitter vote counter - local'
 		},
-		twitter: require('./privconfig-twitter').local,
+		twitter: require('./config-twitter').local,
 		db : {
 			path: 'mongodb://localhost/hashtag-watcher'
 		},
