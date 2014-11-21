@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	twitter = require('twitter'), //ntwitter - allows easy JS access to twitter API's - https://github.com/AvianFlu/ntwitter
 	_ = require('underscore'),
 	fs = require('fs'),
+	getenv = require('getenv'),
 
 	SocketServer = null,
 	Symbol = mongoose.model('Symbol'),
@@ -16,7 +17,7 @@ var mongoose = require('mongoose'),
 
 	pkg = require('package.json'),
 
-	FAKE_TWITTER_CONNECTION = process.env.FAKE_TWITTER_CONNECTION || false,
+	FAKE_TWITTER_CONNECTION = getenv.bool('FAKE_TWITTER_CONNECTION', false),
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,
@@ -79,6 +80,7 @@ var TwitterController = {
 
 		console.log('ENV: ' + process.env.FAKE_TWITTER_CONNECTION);
 		console.log('VAR: ' + FAKE_TWITTER_CONNECTION);
+		console.log(typeof(FAKE_TWITTER_CONNECTION));
 
 		// if we’re in 'dev' mode, we’ll fake the tweets coming in
 		// This is done using a json file we’ve populated with a load of tweets and we’ll randomly choose them at regular intervals

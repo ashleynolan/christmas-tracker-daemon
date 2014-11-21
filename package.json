@@ -17,6 +17,7 @@
     "express": "^4.3.2",
     "forever-monitor": "^1.5.2",
     "fs": "0.0.2",
+    "getenv": "^0.3.0",
     "jade": "^1.7.0",
     "method-override": "^1.0.2",
     "mongoose": "^3.8.17",
