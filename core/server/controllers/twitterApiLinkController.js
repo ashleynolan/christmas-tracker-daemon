@@ -53,8 +53,6 @@ var TwitterController = {
 	 */
 	init : function (socketServer, config) {
 
-		console.log(process.env.FAKE_TWITTER_CONNECTION);
-
 		SocketServer = socketServer; //assigning passed instance of our socket connection to use when we need to emit
 
 		_self.twitterStreamingApi = new twitter(config.global.twitter); //Instantiate the twitterStreamingAPI component
@@ -78,6 +76,9 @@ var TwitterController = {
 	createStream : function () {
 
 		console.log('twitterAPILink :: createStream\n');
+
+		console.log('ENV: ' + process.env.FAKE_TWITTER_CONNECTION);
+		console.log('VAR: ' + FAKE_TWITTER_CONNECTION);
 
 		// if we’re in 'dev' mode, we’ll fake the tweets coming in
 		// This is done using a json file we’ve populated with a load of tweets and we’ll randomly choose them at regular intervals
