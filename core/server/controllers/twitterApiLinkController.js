@@ -41,6 +41,10 @@ var TwitterController = {
 		symbols : null
 	},
 
+	historicState : {
+
+	},
+
 
 	/*
 	 * Initalises our twitter link
@@ -66,6 +70,8 @@ var TwitterController = {
 		console.log('\ntwitterAPILink :: openStream');
 
 		_self.getLocalStateFromServer(_self.createStream);
+
+		_self.getHistoricState();
 	},
 
 
@@ -79,9 +85,6 @@ var TwitterController = {
 		//
 		// This is to stop us getting blocked by Twitter when we’re changing our node server during development
 		if (FAKE_TWITTER_CONNECTION) {
-
-			console.log('FAKE STREAM');
-
 			fs.readFile('core/server/test/tweets.json', function (err, data) {
 				if (err) throw err;
 				//no error = found json object
@@ -256,7 +259,7 @@ var TwitterController = {
 		//save our states
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
-			console.log('State saved at ' + new Date());
+			// console.log('State saved at ' + new Date());
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
 				console.log('Clearing local state – switching to new day');
@@ -268,7 +271,7 @@ var TwitterController = {
 	getLocalStateFromServer : function (cb) {
 
 		Symbol.loadAll(function (err, symbols) {
-			state.getStates(symbols)
+			state.getStates(symbols, 'recent')
 			.then(
 				state.stateArrayToObject
 			)
@@ -280,6 +283,29 @@ var TwitterController = {
 				if (cb !== null)
 					cb();
 			});
+		});
+
+	},
+
+	//at later date, should move this inline with the normal state function and merge the two functions
+	// doesn’t make sense to keep separate as doing some of the same things twice
+	getHistoricState : function () {
+
+		console.log('GETTING HISTORIC STATE!');
+
+		//load all of our symbols
+		//
+		//then we need to get historical state for each one – needs new function to get all related states for each function
+		//
+		//then convert into an object we can understand
+
+		Symbol.loadAll(function (err, symbols) {
+			if (err) console.log(err);
+
+			state.getStates(symbols, 'all')
+			.then(
+				state.stateArrayToObject
+			);
 		});
 
 	}

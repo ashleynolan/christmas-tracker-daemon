@@ -47,8 +47,8 @@ function init (app, config) {
 	//  ===================
 	//  === INIT THE DB ===
 	//  ===================
-	var db = require('./db')(twitterController, config);
 
+	var db = require('./db')(twitterController, config);
 
 	//  ================================
 	//  === APPLICATION ROUTES SETUP ===

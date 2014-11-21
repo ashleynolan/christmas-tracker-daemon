@@ -46,38 +46,31 @@ StateSchema.statics = {
 	*/
 
 	load: function (tag, dateRange, cb) {
+		var now = new Date(),
+			dateToQuery;
 
 		if (dateRange === 'today') {
-			var now = new Date(),
-				today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-
-			this.findOne({
-				tag : tag,
-				date: today
-			})
-			.exec(cb);
+			dateToQuery = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		} else if (dateRange === 'yesterday') {
-			var now = new Date(),
-				yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-
-
-			this.findOne({
-				tag : tag,
-				date: yesterday
-			})
-			.exec(cb);
+			dateToQuery = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
 		} else {
-			var now = new Date(),
-				tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-
-
-			this.findOne({
-				tag : tag,
-				date: tomorrow
-			})
-			.exec(cb);
+			dateToQuery = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 		}
+
+		this.findOne({
+			tag : tag,
+			date: dateToQuery
+		})
+		.exec(cb);
+
+	},
+
+	loadAll: function (tag, cb) {
+
+		this.find({
+			tag : tag
+		}).sort({ date : 1})
+			.exec(cb);
 
 	},
 

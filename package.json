@@ -44,7 +44,8 @@
     "load-grunt-tasks": "~0.6.0",
     "qwery": "^3.4.2",
     "traversty": "^1.0.5",
-    "uglifyify": "~2.5.0"
+    "uglifyify": "~2.5.0",
+    "xcharts": "^0.3.0"
   },
   "subdomain": "christmastracker",
   "engines": {

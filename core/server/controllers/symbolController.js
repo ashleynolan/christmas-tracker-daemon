@@ -76,9 +76,10 @@ exports.create = function (symbolName, value) {
 					}
 				});
 			} else {
-				//check we don't need to update it with new potential new values if our symbol has changed
-				//_this.update(symbol, value, next)
-				console.log('Symbol already exists in collection');
+				//POTENTIAL TODO FOR FUTURE ITERATIONS
+					//check we don't need to update our symbols with potential new values if our symbol has changed
+					//_this.update(symbol, value, next)
+				// console.log('Symbol already exists in collection');
 				resolve();
 			}
 

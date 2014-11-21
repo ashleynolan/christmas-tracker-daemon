@@ -104,22 +104,18 @@ exports.checkState = function (symbol) {
 exports.checkTagState = function (tag) {
 
 	return new Promise(function (resolve, reject) {
-
-		console.log('setupController: checkState: Checking state for ' + tag.tagname + ' – ' + tag._id);
-
+		// console.log('setupController: checkState: Checking state for ' + tag.tagname + ' – ' + tag._id);
 		State.load(tag._id, 'today', function (err, currentState) {
 
 			//if we can find state, great
 			if (currentState) {
 				console.log('setupController: checkState: State found for ' +  tag.tagname);
 				resolve();
-
 			//else create a state in the DB and set to zero
 			} else {
 				console.log('setupController: checkState: State not found, so creating state myself', tag.tagname);
 
 				state.create(tag, function (err) {
-
 					if (err) {
 						console.log('setupController: checkState: ' + err + ': state not saved');
 					} else {

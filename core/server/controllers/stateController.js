@@ -34,7 +34,11 @@ exports.create = function (tag, cb) {
 
 
 //Loops through each symbol and gets the state of each in turn
-exports.getStates = function (symbols) {
+//duration is passed through to the get symbol states method
+//duration takes two values, recent or all
+//recent returns just the most recent states
+//duration returns all states for that symbol
+exports.getStates = function (symbols, duration) {
 
 	return new Promise(function (resolve, reject) {
 
@@ -44,7 +48,7 @@ exports.getStates = function (symbols) {
 
 		//for each symbol
 		_.each(symbols, function (symbol, key) {
-			symbolStates.push(_this.getSymbolState(symbol));
+			symbolStates.push(_this.getSymbolState(symbol, duration));
 		});
 
 		return Promise.all(
@@ -58,7 +62,10 @@ exports.getStates = function (symbols) {
 
 //gets the state of the symbol passed to the function
 //does this by looping through the tags associated with it and getting their state
-exports.getSymbolState = function (symbol) {
+//duration takes two values, recent or all
+//recent returns just the most recent states
+//duration returns all states for that symbol
+exports.getSymbolState = function (symbol, duration) {
 
 	return new Promise(function (resolve, reject) {
 
@@ -67,7 +74,11 @@ exports.getSymbolState = function (symbol) {
 		//and then for each hashtag
 		_.each(symbol.tags, function (tag, j) {
 			//console.log('server/controllers/state :: getSymbolState :: ' + tag.tagname);
-			tagStates.push(_this.getTagState(tag));
+			if (duration === 'recent') {
+				tagStates.push(_this.getTagState(tag));
+			} else if (duration === 'all') {
+				tagStates.push(_this.getAllTagStates(tag));
+			}
 		});
 
 		return Promise.all(
@@ -82,11 +93,22 @@ exports.getSymbolState = function (symbol) {
 exports.getTagState = function (tag) {
 
 	return new Promise(function (resolve, reject) {
-
-		//{ tagname: 'yuletide', _id: 5460e183cf25cedd563ff8b5 }
+		//e.g. { tagname: 'yuletide', _id: 5460e183cf25cedd563ff8b5 }
 
 		State.load(tag._id, 'today', function (err, currentState) {
 			tag.state = currentState;
+			resolve(tag);
+		});
+	});
+};
+
+exports.getAllTagStates = function (tag) {
+
+	return new Promise(function (resolve, reject) {
+		//e.g. { tagname: 'yuletide', _id: 5460e183cf25cedd563ff8b5 }
+
+		State.loadAll(tag._id, function (err, allStates) {
+			tag.states = allStates;
 			resolve(tag);
 		});
 	});
@@ -146,6 +168,10 @@ exports.stateArrayToObject = function (states) {
 					id : tag._id,
 					count : tag.state.count
 				};
+
+				// console.log(data)
+				//data[0].tags[0].states);
+
 
 				stateObject[symbol.name].total += stateObject[symbol.name].tags[tag.tagname].count;
 			});
