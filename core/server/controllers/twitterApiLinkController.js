@@ -85,6 +85,7 @@ var TwitterController = {
 		//
 		// This is to stop us getting blocked by Twitter when we’re changing our node server during development
 		if (FAKE_TWITTER_CONNECTION) {
+			console.log('STARTING FAKE STREAM');
 			fs.readFile('core/server/test/tweets.json', function (err, data) {
 				if (err) throw err;
 				//no error = found json object
@@ -98,7 +99,7 @@ var TwitterController = {
 			});
 
 		} else {
-
+			console.log('STARTING REAL STREAM');
 			var tweet,
 				tweetText;
 
