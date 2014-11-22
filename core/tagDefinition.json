@@ -32,11 +32,17 @@
 	"christmas" : {
 		"tags" : ["christmas", "xmas", "noel"]
 	},
+	"christmascards" : {
+		"tags" : ["christmas card", "christmas cards", "xmas card", "xmas cards"]
+	},
+	"christmasdecorations" : {
+		"tags" : ["christmas decorations", "xmas decorations"]
+	},
 	"christmaslights" : {
-		"tags" : ["christmas lights"]
+		"tags" : ["christmas lights", "xmas lights"]
 	},
 	"christmastree" : {
-		"tags" : ["christmas tree"]
+		"tags" : ["christmas tree", "xmas tree"]
 	},
 	"cliffrichard" : {
 		"tags" : ["cliff richard"]
