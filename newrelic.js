@@ -8,7 +8,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name : ['Christmas Tracker'],
+  app_name : ['Christmas Tracker Daemon'],
   /**
    * Your New Relic license key.
    */
