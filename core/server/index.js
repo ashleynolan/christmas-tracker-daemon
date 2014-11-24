@@ -4,7 +4,6 @@
  */
 
 var express = require('express'),
-	compress = require('compression'),
 	timeout = require('connect-timeout'),
 	pkg = require('package.json');
 
