@@ -21,7 +21,7 @@ var mongoose = require('mongoose'),
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,
-	STATE_SAVE_DURATION = 10000,
+	STATE_SAVE_DURATION = 60000,
 
 	_this = this;
 
@@ -70,7 +70,7 @@ var TwitterController = {
 
 		_self.getLocalStateFromServer(_self.createStream);
 
-		_self.getHistoricState();
+		// _self.getHistoricState();
 	},
 
 
@@ -78,17 +78,12 @@ var TwitterController = {
 
 		console.log('twitterAPILink :: createStream\n');
 
-		console.log('ENV: ' + process.env.FAKE_TWITTER_CONNECTION);
-		console.log('VAR: ' + FAKE_TWITTER_CONNECTION);
-		console.log(typeof(FAKE_TWITTER_CONNECTION));
-
 		// if we’re in 'dev' mode, we’ll fake the tweets coming in
 		// This is done using a json file we’ve populated with a load of tweets and we’ll randomly choose them at regular intervals
 		// to simulate the connection to twitter
 		//
 		// This is to stop us getting blocked by Twitter when we’re changing our node server during development
 		if (FAKE_TWITTER_CONNECTION) {
-			console.log('STARTING FAKE STREAM');
 			fs.readFile('core/server/test/tweets.json', function (err, data) {
 				if (err) throw err;
 				//no error = found json object
@@ -102,7 +97,6 @@ var TwitterController = {
 			});
 
 		} else {
-			console.log('STARTING REAL STREAM');
 			var tweet,
 				tweetText;
 
@@ -263,7 +257,7 @@ var TwitterController = {
 		//save our states
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
-			// console.log('State saved at ' + new Date());
+			console.log('State saved at ' + new Date());
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
 				console.log('Clearing local state – switching to new day');
