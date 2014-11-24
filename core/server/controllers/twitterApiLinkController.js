@@ -242,7 +242,10 @@ var TwitterController = {
 	//we want to convert out state to an easier to read format for the javascript on the other side
 	emitState : function () {
 		//emit our tweet
-		SocketServer.sockets.emit('tweet', _self.state.symbols);
+		//SocketServer.sockets.emit('tweet', _self.state.symbols);
+
+		//emit our tweet to our client FE server
+		SocketServer.client.emit('tweet', _self.state.symbols);
 	},
 
 	//updates the states in the DB every x seconds
@@ -258,6 +261,8 @@ var TwitterController = {
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
 			console.log('State saved at ' + new Date());
+			SocketServer.client.emit('symbolState', _self.state.symbols); //emit new state for our front end to save in state
+
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
 				console.log('Clearing local state – switching to new day');

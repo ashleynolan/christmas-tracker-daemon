@@ -1,9 +1,15 @@
 
 
-var io = require('socket.io'); //socket.io - used for our websocket connection
+var io = require('socket.io'),//socket.io - used for our websocket connection
+
+	clientio  = require('socket.io-client'),
+
+	twitter = require('core/server/controllers/twitterApiLinkController');
 
 
-var socketServer = {
+var SocketServer = {
+
+	client : clientio.connect('http://localhost:3002'),
 
 	init : function (app, server) {
 
@@ -19,8 +25,8 @@ var socketServer = {
 		socketServer.sockets.on('connection', function(socket) {
 			console.log('twitter.js: New connection logged');
 
-			//needs to emit a state from our twitter controller
-			//socket.emit('data', twitterController.getState);
+			//Once we get a connection from our FE app, send it out the current state
+			_self.client.emit('initialState', twitter.state);
 		});
 
 		//  ============================
@@ -31,8 +37,12 @@ var socketServer = {
 			console.log('twitter.js: socketServer has closed');
 		});
 
+		socketServer.client = SocketServer.client;
+
 		return socketServer;
 	}
-}
+};
 
-module.exports = socketServer.init;
+var _self = SocketServer;
+
+module.exports = SocketServer.init;

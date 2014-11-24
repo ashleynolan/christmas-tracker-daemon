@@ -3,8 +3,7 @@
  * Declare our Module dependencies at the top
  */
 
-var async = require('async');
-
+var async = require('async'),
 	symbol = require('./controllers/symbolController');
 
 
