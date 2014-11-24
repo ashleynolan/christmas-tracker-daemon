@@ -101,7 +101,7 @@ exports.update = function (symbol, value, next) {
 		console.log('Checking if ' + hashtag.tagname + 'is present in our most up to date symbol');
 
 		//should make global proto
-		var isInArray = Symbol.isInArray(newestHashtags, hashtag.tagname)
+		var isInArray = Symbol.isInArray(newestHashtags, hashtag.tagname);
 
 		//if it is in the array, then remove it from our list of new hashtags to add to our object
 		if (isInArray) {
@@ -125,7 +125,7 @@ exports.update = function (symbol, value, next) {
 		next('Symbol already exists in collection');
 	}
 
-}
+};
 
 /**
  * Display
@@ -133,50 +133,8 @@ exports.update = function (symbol, value, next) {
 
 exports.display = function(req, res) {
 
-	console.log('questionController: Displaying page');
-
-	//console.log(twitter.state.symbols);
-
 	res.render('index', {
 		symbols: twitter.state.symbols
 	});
 
 };
-
-
-
-// exports.getAllSymbols = function (req, res) {
-
-// 	Symbol.loadAll(function (err, symbols) {
-
-// 		_.each(symbols, function (key, value) {
-
-// 			//console.log(key, value);
-
-// 		});
-// 		//setup.getState(function (state) {
-
-// 			// console.log(state);
-// 			//reduce tags into associated array
-// 			// var tags = _.reduce (state.tags, function (reduced, item) {
-// 			// 	reduced[item.tag] = item;
-// 			// 	return reduced;
-// 			// }, {});
-
-// 			// res.render('layouts/symbol', {
-// 			// 	symbol: symbol,
-// 			// 	state: state,
-// 			// 	tags: tags
-// 			// });
-// 			//
-// 			res.render('layouts/home', {
-// 				title: 'Test Title',
-// 				symbolsJSON: symbols
-// 			});
-
-// 		//});
-
-// 	});
-
-
-// };

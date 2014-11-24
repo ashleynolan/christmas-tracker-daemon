@@ -2,6 +2,12 @@
  * Global app/site styles
  */
 
+html, body,
+.l-container {
+	width: 100%;
+	height: 100%;
+}
+
 body {
 	background-color: $color-bg;
 	color: #333;
@@ -21,24 +27,71 @@ body {
 		min-width: #{$layout-min-width}px;
 	}
 }
-	.page-header-title {
-		margin-bottom: 10px;
-		padding:10px;
-		background: #2980b9;
-		color: #fff;
-	}
+#scroll-proxy {
+	height: 5400px;
+}
 
-	.page-content {
-		border-bottom: 1px solid #333;
-	}
 
-	.symbols {
-		overflow: hidden;
-		padding-bottom: 50px;
+.illust-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+	.illust-level {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	.illust-level--intro {
+		width: 100%;
+		height: 700px;
+	}
+	.illust-level--1 {
+		width: 100%;
+		transform: scale(0.5);
 	}
 		.symbol {
-			@include respond-min($bp-mid) {
-				float: left;
-				width: 25%;
+			position: relative;
+		}
+		.illustItem {
+			position: relative;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+			.illustItem--snowglobe {
+				background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%22559.89%22%20width%3D%22514.29%22%20version%3D%221%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%20y2%3D%22220.93%22%20gradientUnits%3D%22userSpaceOnUse%22%20x2%3D%2240%22%20y1%3D%22646.65%22%20x1%3D%22728.57%22%3E%3Cstop%20stop-color%3D%22%23bcbbbb%22%20offset%3D%220%22%2F%3E%3Cstop%20stop-color%3D%22%23bcbbbb%22%20stop-opacity%3D%220%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22b%22%20y2%3D%22649.01%22%20gradientUnits%3D%22userSpaceOnUse%22%20x2%3D%22371.43%22%20gradientTransform%3D%22matrix(.988%200%200%201%2010.295%20-.037)%22%20y1%3D%22766.54%22%20x1%3D%22371.43%22%3E%3Cstop%20stop-color%3D%22%23008080%22%20offset%3D%220%22%2F%3E%3Cstop%20stop-color%3D%22%23003939%22%20offset%3D%22.985%22%2F%3E%3Cstop%20stop-color%3D%22%23008080%22%20stop-opacity%3D%220%22%20offset%3D%221%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%3E%3Cpath%20d%3D%22M79.29%20441.43s61.88-21.95%20182.14-21.43c152.52.66%20179.28%2023.57%20179.28%2023.57-118.67%2048.25-224.92%2049.18-361.42-2.14z%22%20fill-rule%3D%22evenodd%22%20stroke%3D%22%23000%22%2F%3E%3Cpath%20d%3D%22M634.29%20463.79a257.14%20257.14%200%201%201-514.29%200%20257.14%20257.14%200%201%201%20514.29%200z%22%20fill%3D%22url(%23a)%22%20transform%3D%22translate(-120%20-206.65)%22%2F%3E%3Cpath%20d%3D%22M352.86%20693.08a111.43%2059.286%200%201%201-222.86%200%20111.43%2059.286%200%201%201%20222.86%200z%22%20transform%3D%22matrix(1.481%200%200%201%20-102.5%20-233.793)%22%20fill%3D%22%23f9f9f9%22%2F%3E%3Cpath%20d%3D%22M79.36%20442.85c129.66%2047.94%20249.52%2049.77%20364.03%200l42.33%2074.29c-158.03%2058.3-276.55%2055.24-457.15-2.86l50.79-71.43z%22%20fill-rule%3D%22evenodd%22%20stroke%3D%22%23000%22%20stroke-width%3D%22.994%22%20fill%3D%22url(%23b)%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+				width: 30%;
+				height: 300px;
+				margin: 300px auto;
 			}
-	}
+			.illustItem--santa {
+				background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203.2 425" enable-background="new 0 0 203.2 425"><circle fill="#6BC6B5" cx="173.2" cy="265" r="30"/><path fill="#F1627A" d="M68 385c-2.2 0-4 1.8-4 4v2c0 2.2-1.8 4-4 4h-2c-2.2 0-4 1.8-4 4v2c0 2.2-1.8 4-4 4h-2c-2.2 0-4 1.8-4 4v2c0 2.2-1.8 4-4 4h-2c-2.2 0-4 1.8-4 4v2c0 2.2 1.8 4 4 4h42c2.2 0 4-1.8 4-4v-32c0-2.2-1.8-4-4-4h-12zM112 385c2.2 0 4 1.8 4 4v2c0 2.2 1.8 4 4 4h2c2.2 0 4 1.8 4 4v2c0 2.2 1.8 4 4 4h2c2.2 0 4 1.8 4 4v2c0 2.2 1.8 4 4 4h2c2.2 0 4 1.8 4 4v2c0 2.2-1.8 4-4 4h-42c-2.2 0-4-1.8-4-4v-32c0-2.2 1.8-4 4-4h12zM0 300h180v90h-180zM180.2 300c0 12.4-2.5 24.3-7.1 35-4.6 10.8-11.1 20.5-19.3 28.6-8.1 8.1-17.8 14.7-28.6 19.3-10.8 4.6-22.6 7.1-35 7.1s-24.3-2.5-35-7.1c-10.8-4.6-20.5-11.1-28.6-19.3s-14.7-17.8-19.3-28.6c-4.6-10.8-7.1-22.6-7.1-35s2.5-24.3 7.1-35c4.6-10.8 11.1-20.5 19.3-28.6 8.1-8.1 17.8-14.7 28.6-19.3s22.6-7.1 35-7.1 24.3 2.5 35 7.1 20.5 11.1 28.6 19.3c8.1 8.1 14.7 17.8 19.3 28.6 4.6 10.7 7.1 22.6 7.1 35z"/><circle fill="#EDE0B7" cx="90.2" cy="210" r="60"/><path fill="#fff" d="M90.2 240c-28 0-51.4-19.1-58.1-45-1.2 4.8-1.9 9.8-1.9 15 0 33.1 26.9 60 60 60s60-26.9 60-60c0-5.2-.7-10.2-1.9-15-6.6 25.9-30.1 45-58.1 45z"/><path fill="#B2A58E" d="M94.2 222h-8l4-12z"/><circle fill="#F1627A" cx="90.2" cy="228" r="4"/><path fill="#E4F4F4" d="M90.2 224c-2.2 0-4 1.8-4 4h8c0-2.2-1.7-4-4-4z"/><g fill="#B2A58E"><path d="M98.2 216c0-.4.1-.8.2-1.2.2-.4.4-.7.6-1 .3-.3.6-.5 1-.6.4-.2.8-.2 1.2-.2s.8.1 1.2.2c.4.2.7.4 1 .6.3.3.5.6.6 1 .2.4.2.8.2 1.2v2h1v-2c0-.5-.1-1.1-.3-1.6-.2-.5-.5-.9-.9-1.3s-.8-.7-1.3-.9c-.5-.2-1-.3-1.6-.3s-1.1.1-1.6.3c-.5.2-.9.5-1.3.9s-.7.8-.9 1.3c-.2.5-.3 1-.3 1.6v2h1v-2zM77.2 216c0-.4.1-.8.2-1.2.2-.4.4-.7.6-1 .3-.3.6-.5 1-.6.4-.2.8-.2 1.2-.2s.8.1 1.2.2c.4.2.7.4 1 .6.3.3.5.6.6 1 .2.4.2.8.2 1.2v2h1v-2c0-.5-.1-1.1-.3-1.6-.2-.5-.5-.9-.9-1.3s-.8-.7-1.3-.9c-.5-.2-1-.3-1.6-.3s-1.1.1-1.6.3c-.5.2-.9.5-1.3.9s-.7.8-.9 1.3c-.2.5-.3 1-.3 1.6v2h1v-2z"/></g><g fill="#fff"><circle cx="90.2" cy="320" r="2"/><circle cx="90.2" cy="340" r="2"/><circle cx="90.2" cy="300" r="2"/></g><g fill="#F598AD"><circle cx="73.8" cy="228" r="6"/><circle cx="106.8" cy="228" r="6"/></g><path fill="#EDE0B7" d="M45.6 293h5.6v2.8h-5.6zM45.6 295.8h11.2v2.8h-11.2zM45.6 301.4h11.2v2.8h-11.2zM45.6 304.2h8.4v2.8h-8.4zM45.6 298.6h14v2.8h-14z"/><path fill="#B2A58E" d="M48.4 295.5h2.8v.3h-2.8zM48.4 298.3h8.4v.3h-8.4zM48.4 301.1h8.4v.3h-8.4zM48.4 303.9h8.4v.3h-8.4z"/><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="10.25" y1="300" x2="45.625" y2="300"><stop offset="0" stop-color="#F1627A"/><stop offset="1" stop-color="#E55D7E"/></linearGradient><path fill="url(#a)" d="M10.2 293h35.4v14h-35.4z"/><path fill="#F1627A" d="M10.2 210l80-200 80 200z"/><path fill="#fff" d="M18.2 180l-8 20h160l-8-20z"/><circle fill="#fff" cx="90.2" cy="10" r="10"/><path fill="#6BC6B5" d="M157 239.8l-29.2 60.2 54.3-41.4z"/><path fill="#EDE0B7" d="M129.3 293h5.6v2.8h-5.6zM123.7 295.8h11.2v2.8h-11.2zM123.7 301.4h11.2v2.8h-11.2zM126.5 304.2h8.4v2.8h-8.4zM120.9 298.6h14v2.8h-14z"/><path fill="#B2A58E" d="M129.3 295.5h2.8v.3h-2.8zM123.7 298.3h8.4v.3h-8.4zM123.7 301.1h8.4v.3h-8.4zM123.7 303.9h8.4v.3h-8.4z"/><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="1661.625" y1="1178" x2="1697" y2="1178" gradientTransform="matrix(-1 0 0 -1 1831.875 1478)"><stop offset="0" stop-color="#F1627A"/><stop offset="1" stop-color="#E55D7E"/></linearGradient><path fill="url(#b)" d="M134.9 293h35.4v14h-35.4z"/></svg>');
+				width: 30%;
+				height: 150px;
+				margin: 400px auto;
+			}
+
+		.symbol-total {
+			.symbol--snow & {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		}
+
+
+
+// Symbol styling – full list
+	// .symbols {
+	// 	overflow: hidden;
+	// 	padding-bottom: 50px;
+	// }
+	// 	.symbol {
+	// 		@include respond-min($bp-mid) {
+	// 			float: left;
+	// 			width: 25%;
+	// 		}
+	// }
