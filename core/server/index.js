@@ -8,6 +8,7 @@ var express = require('express'),
 	logger  = require('morgan'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
+	timeout = require('connect-timeout'),
 	pkg = require('package.json');
 
 
@@ -43,6 +44,8 @@ var server = {
 			res.locals.pkg = pkg;
 			next();
 		});
+
+		app.use(timeout('20s'));
 
 		// bodyParser should be above methodOverride
 		app.use(bodyParser.urlencoded({
