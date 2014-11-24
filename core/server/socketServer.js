@@ -7,6 +7,11 @@ var socketServer = {
 
 	init : function (app, server) {
 
+		io.enable('browser client minification');  // send minified client
+		// io.enable('browser client etag');          // apply etag caching logic based on version number
+		io.enable('browser client gzip');          // gzip the file
+		io.set('log level', 1);                    // reduce logging
+
 		//Start a Socket.IO listen
 		var socketServer = io.listen(server);
 
@@ -31,12 +36,8 @@ var socketServer = {
 			console.log('twitter.js: socketServer has closed');
 		});
 
-
-
 		return socketServer;
-
 	}
-
 }
 
 module.exports = socketServer.init;
