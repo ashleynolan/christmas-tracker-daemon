@@ -13,7 +13,6 @@ var server = {
 	init : function (app, config) {
 		app.set('showStackError', true);
 
-		app.register('.html', require('jade'));
 		app.set("view options", { layout: false });
 
 		app.set('port', process.env.PORT || 3001);
