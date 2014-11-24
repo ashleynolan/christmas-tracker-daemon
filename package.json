@@ -13,6 +13,7 @@
     "bluebird": "^2.3.6",
     "body-parser": "^1.2.2",
     "compression": "^1.0.2",
+    "connect-timeout": "^1.4.0",
     "es6-promise": "^2.0.0",
     "express": "^4.3.2",
     "forever-monitor": "^1.5.2",
