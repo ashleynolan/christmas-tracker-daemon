@@ -17,6 +17,7 @@ var sharedConfig = {
 module.exports = {
 	local: {
 		mode: 'local',
+		clientURL: 'http://localhost:3002',
 		port: 3002,
 		app: {
 			name: 'Twitter vote counter - local'
@@ -29,6 +30,7 @@ module.exports = {
 
 	dev: {
 		mode: 'development',
+		clientURL: 'http://localhost:3002',
 		port: 3002,
 		app: {
 			name: 'Twitter vote counter - Dev'
@@ -41,6 +43,7 @@ module.exports = {
 
 	prod: {
 		mode: 'production',
+		clientURL: 'http://christmas-tracker.herokuapp.com',
 		port: 3002,
 		app: {
 			name: 'Twitter vote counter - Prod'
@@ -54,7 +57,7 @@ module.exports = {
 
 	hosts: [
 		{
-			domain: 'twitterpoll.local',
+			domain: 'christmastracker.local',
 			target: ['localhost:3001']
 		}
 	]

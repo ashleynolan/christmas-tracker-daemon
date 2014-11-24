@@ -8,14 +8,13 @@ var io = require('socket.io'),//socket.io - used for our websocket connection
 
 
 var SocketServer = {
+	client : null,
 
-	//client : clientio.connect('http://localhost:3002'),
-	client : clientio.connect('http://christmas-tracker.herokuapp.com'),
-
-	init : function (app, server) {
+	init : function (app, server, config) {
 
 		//Start a Socket.IO listen
 		var socketServer = io.listen(server);
+		_self.client = clientio.connect(config.clientURL);
 
 		//  ==================
 		//  === ON CONNECT ===
