@@ -26,7 +26,7 @@ var SocketServer = {
 			console.log('twitter.js: New connection logged');
 
 			//Once we get a connection from our FE app, send it out the current state
-			_self.client.emit('initialState', twitter.state);
+			_self.emitCurrentState();
 		});
 
 		//  ============================
@@ -40,6 +40,13 @@ var SocketServer = {
 		socketServer.client = SocketServer.client;
 
 		return socketServer;
+	},
+
+	emitCurrentState : function () {
+
+		console.log('sending new state');
+		_self.client.emit('symbolState', twitter.state);
+
 	}
 };
 
