@@ -21,7 +21,7 @@ var mongoose = require('mongoose'),
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,
-	STATE_SAVE_DURATION = 60000,
+	STATE_SAVE_DURATION = 1000,
 
 	_this = this;
 
