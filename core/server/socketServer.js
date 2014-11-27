@@ -45,7 +45,7 @@ var SocketServer = {
 	emitCurrentState : function () {
 
 		console.log('sending new state');
-		_self.client.emit('symbolState', twitter.state);
+		// _self.client.emit('symbolState', twitter.state);
 
 	}
 };
