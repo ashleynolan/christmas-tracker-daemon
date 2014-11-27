@@ -21,7 +21,7 @@ var mongoose = require('mongoose'),
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
 	TEST_TWEET_TIMER = 50,
-	STATE_SAVE_DURATION = 60000,
+	STATE_SAVE_DURATION = 10000,
 
 	_this = this;
 
@@ -261,7 +261,7 @@ var TwitterController = {
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
 			console.log('State saved at ' + new Date());
-			SocketServer.emitCurrentState(); //emit new state for our front end to save in state
+			SocketServer.client.emit('symbolState', twitter.state); //emit new state for our front end to save in state
 
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
