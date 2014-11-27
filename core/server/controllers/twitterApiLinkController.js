@@ -261,7 +261,7 @@ var TwitterController = {
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
 			console.log('State saved at ' + new Date());
-			SocketServer.client.emit('symbolState', twitter.state); //emit new state for our front end to save in state
+			SocketServer.client.emit('symbolState', _self.state); //emit new state for our front end to save in state
 
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
