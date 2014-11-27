@@ -17,7 +17,7 @@ var sharedConfig = {
 module.exports = {
 	local: {
 		mode: 'local',
-		clientURL: 'http://localhost:3002',
+		clientURL: 'http://localhost:5000',
 		port: 3002,
 		app: {
 			name: 'Twitter vote counter - local'
