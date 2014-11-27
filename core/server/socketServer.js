@@ -14,7 +14,7 @@ var SocketServer = {
 
 		//Start a Socket.IO listen
 		var socketServer = io.listen(server);
-		// _self.client = clientio.connect(config.clientURL);
+		_self.client = clientio.connect(config.clientURL);
 
 		//  ==================
 		//  === ON CONNECT ===
@@ -37,7 +37,7 @@ var SocketServer = {
 			console.log('twitter.js: socketServer has closed');
 		});
 
-		// socketServer.client = SocketServer.client;
+		socketServer.client = SocketServer.client;
 
 		return socketServer;
 	},
@@ -45,7 +45,7 @@ var SocketServer = {
 	emitCurrentState : function () {
 
 		console.log('sending new state');
-		// _self.client.emit('symbolState', twitter.state);
+		_self.client.emit('symbolState', twitter.state);
 
 	}
 };
