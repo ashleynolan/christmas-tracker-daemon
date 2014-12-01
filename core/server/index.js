@@ -17,7 +17,7 @@ var server = {
 		app.set('view engine', 'jade');
 		app.set("view options", { layout: false });
 
-		app.set('port', process.env.PORT || 3001);
+		app.set('port', process.env.PORT || 6000);
 
 		// expose package.json to views
 		app.use(function (req, res, next) {

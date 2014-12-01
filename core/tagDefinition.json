@@ -98,6 +98,9 @@
 	"god" : {
 		"tags" : ["god"]
 	},
+	"gold" : {
+		"tags" : ["gold"]
+	},
 	"grinch" : {
 		"tags" : ["grinch"]
 	},
