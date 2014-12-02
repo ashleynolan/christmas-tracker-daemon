@@ -120,7 +120,6 @@ var TwitterController = {
 				stream.on('end', function (response) {
 					// Handle a disconnection
 					console.log("twitterAPILink :: Disconnection: ", response.statusCode);
-					console.log(response);
 
 					//try reconnecting to twitter in 30 seconds
 					setTimeout(function () {
@@ -176,7 +175,7 @@ var TwitterController = {
 			}
 
 			//Build up a smaller element of data that we want to use from the mammoth tweet data we receive
-			tweet = {
+			var tweet = {
 				symbol: null,
 				time: null,
 				textRaw: data.text,
@@ -199,7 +198,8 @@ var TwitterController = {
 
 	matchTweetToTags : function (tweet) {
 
-		var validTweet = false;
+		var validTweet = false,
+			reg;
 
 		//Go through each tracker objects set of tags and check if it was mentioned. If so, increment the hashtag counter, the total objects counter and
 		//set the 'claimed' variable to true to indicate something was mentioned so we can increment
@@ -209,15 +209,13 @@ var TwitterController = {
 			//for each symbol, we could be monitoring multiple tags, so loop through these also
 			_.each(symbol.tags, function(value, tag) {
 
-				var reg = new RegExp('.*\\b' + tag.toLowerCase() + '\\b.*')
+				reg = new RegExp('.*\\b' + tag.toLowerCase() + '\\b.*');
 
 				//do a regex match here so that we match the exact tag
 				if (tweet.text.match(reg) !== null) {
 					_self.updateSymbol(symbol, tag);
 
 					validTweet = true;
-
-					//console.log(symbol);
 				}
 			});
 		});
@@ -234,10 +232,8 @@ var TwitterController = {
 	//update the symbols counts
 	updateSymbol : function (symbol, tag) {
 
-		var symbolValues = symbol.tags[tag];
-
-		//increment the hashtag total for the symbol
-		symbolValues.count++;
+		//increment the specific tag total for the symbol
+		symbol.tags[tag].count++;
 
 		//increment the symbols total votes
 		symbol.total++;
