@@ -36,6 +36,7 @@ var TwitterController = {
 		numberOfTweets : null
 	},
 
+	saveTimer : null,
 
 	state : {
 		totalTweets : 0,
@@ -204,7 +205,7 @@ var TwitterController = {
 			//for each symbol, we could be monitoring multiple tags, so loop through these also
 			_.each(symbol.tags, function(value, tag) {
 
-				var reg = new RegExp('.*\\b' + tag + '\\b.*')
+				var reg = new RegExp('.*\\b' + tag.toLowerCase() + '\\b.*')
 
 				//do a regex match here so that we match the exact tag
 				if (tweet.text.match(reg) !== null) {
@@ -250,8 +251,13 @@ var TwitterController = {
 
 	//updates the states in the DB every x seconds
 	setupStateSaver : function () {
+		//if we’ve already got a saveTimer setup, clear it and then reinit, rather than keep making new ones
+		if (_self.saveTimer !== null) {
+			clearInterval(_self.saveTimer);
+		}
+
 		//set to update every x seconds (set in constants at the top of this file)
-		setInterval(function () {
+		_self.saveTimer = setInterval(function () {
 			_self.saveState();
 		}, STATE_SAVE_DURATION);
 	},
