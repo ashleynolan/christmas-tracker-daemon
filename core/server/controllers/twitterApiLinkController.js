@@ -138,7 +138,10 @@ var TwitterController = {
 				});
 			});
 		}
-		_self.setupStateSaver();
+
+		if (_self.saveTimer === null) {
+			_self.setupStateSaver();
+		}
 	},
 
 	receiveTestTweet : function () {
@@ -251,18 +254,12 @@ var TwitterController = {
 
 	//updates the states in the DB every x seconds
 	setupStateSaver : function () {
-		//if we’ve already got a saveTimer setup, clear it and then reinit, rather than keep making new ones
-		if (_self.saveTimer !== null) {
-			clearInterval(_self.saveTimer);
-		}
-
 		//set to update every x seconds (set in constants at the top of this file)
-		_self.saveTimer = setInterval(function () {
-			_self.saveState();
-		}, STATE_SAVE_DURATION);
+		_self.saveTimer = setInterval(_self.saveState, STATE_SAVE_DURATION);
 	},
 
 	saveState : function () {
+		console.log('Starting Save process at ' + new Date());
 		//save our states
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
