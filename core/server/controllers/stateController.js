@@ -247,13 +247,13 @@ exports.updateAllStates = function (globalState) {
 exports.loadState = function (tagName, tagState) {
 
 	return new Promise(function (resolve, reject) {
-		console.log('server/controllers/state :: loadState :: ' + tagName);
+		// console.log('server/controllers/state :: loadState :: ' + tagName);
 
 		//load the state of the same id
 		State.load(tagState.id, 'today', function (err, dbState) {
 			if (err === null) {
 				_this.updateState(tagState, dbState, function(msg) {
-					console.log('stateController :: loadState :: ' + msg);
+					// console.log('stateController :: loadState :: ' + msg);
 					resolve(msg);
 				});
 			}
