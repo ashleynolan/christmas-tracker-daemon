@@ -120,6 +120,7 @@ var TwitterController = {
 				stream.on('end', function (response) {
 					// Handle a disconnection
 					console.log("twitterAPILink :: Disconnection: ", response.statusCode);
+					console.log(response);
 
 					//try reconnecting to twitter in 30 seconds
 					setTimeout(function () {
