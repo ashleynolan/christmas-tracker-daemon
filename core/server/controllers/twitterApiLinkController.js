@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 	_ = require('underscore'),
 	fs = require('fs'),
 	getenv = require('getenv'),
-	heapdump = require('heapdump'),
+	// heapdump = require('heapdump'),
 
 	SocketServer = null,
 	Symbol = mongoose.model('Symbol'),

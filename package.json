@@ -27,7 +27,6 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "heapdump": "^0.3.3"
   },
   "subdomain": "christmastrackerdaemon",
   "engines": {
