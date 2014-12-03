@@ -29,6 +29,8 @@ var mongoose = require('mongoose'),
 
 var TwitterController = {
 
+	activeStream : null,
+
 	twitterStreamingApi : null,
 	tags : null,
 
@@ -103,47 +105,60 @@ var TwitterController = {
 				tweetText;
 
 			//Tell the twitter API to filter on the watchSymbols
-			_self.twitterStreamingApi.stream('statuses/filter', { track: _self.tags }, function(stream) {
-
-				//We have a connection. Now watch the 'data' event for incomming tweets.
-				stream.on('data', _self.dataReceived);
-
-				//catch any errors from the streaming API
-				stream.on('error', function(error) {
-					console.log("twitterAPILink :: My error: ", error);
-
-					//try reconnecting to twitter in 30 seconds
-					setTimeout(function () {
-						_self.createStream();
-					}, SERVER_BACKOFF_TIME);
-
-				});
-				stream.on('end', function (response) {
-					// Handle a disconnection
-					console.log("twitterAPILink :: Disconnection: ", response.statusCode);
-
-					//try reconnecting to twitter in 30 seconds
-					setTimeout(function () {
-						_self.createStream();
-					}, SERVER_BACKOFF_TIME);
-
-				});
-				stream.on('destroy', function (response) {
-					// Handle a 'silent' disconnection from Twitter, no end/error event fired
-					console.log("twitterAPILink :: Destroyed: ", response);
-
-					//try reconnecting to twitter in 30 seconds
-					setTimeout(function () {
-						_self.createStream();
-					}, SERVER_BACKOFF_TIME);
-				});
-			});
+			_self.twitterStreamingApi.stream('statuses/filter', { track: _self.tags }, _self.onStreamConnect);
 		}
 
 		if (_self.saveTimer === null) {
 			_self.setupStateSaver();
 		}
 	},
+
+
+	onStreamConnect : function (stream) {
+
+		_self.activeStream = stream;
+
+		//We have a connection. Now watch the 'data' event for incomming tweets.
+		stream.on('data', _self.dataReceived);
+
+		//catch any errors from the streaming API
+		stream.on('error', _self.onStreamError);
+		stream.on('end', _self.onStreamEnd);
+		stream.on('destroy', _self.onStreamDestroy);
+
+	},
+
+	onStreamError : function (error) {
+
+		console.log("twitterAPILink :: My error: ", error);
+
+		//try reconnecting to twitter in 30 seconds
+		setTimeout(_self.createStream, SERVER_BACKOFF_TIME);
+
+	},
+
+	onStreamEnd : function (response) {
+
+		// Handle a disconnection
+		console.log("twitterAPILink :: Disconnection: ", response.statusCode);
+
+		_self.activeStream.destroy();
+
+		//try reconnecting to twitter in 30 seconds
+		setTimeout(_self.createStream, SERVER_BACKOFF_TIME);
+
+	},
+
+	onStreamDestroy : function (response) {
+
+		// Handle a 'silent' disconnection from Twitter, no end/error event fired
+		console.log("twitterAPILink :: Destroyed: ", response);
+
+		//try reconnecting to twitter in 30 seconds
+		setTimeout(_self.createStream, SERVER_BACKOFF_TIME);
+
+	},
+
 
 	receiveTestTweet : function () {
 
@@ -200,26 +215,29 @@ var TwitterController = {
 	matchTweetToTags : function (tweet) {
 
 		var validTweet = false,
-			reg;
+			reg,
+			symbol, symbolKey,
+			tag;
 
 		//Go through each tracker objects set of tags and check if it was mentioned. If so, increment the hashtag counter, the total objects counter and
 		//set the 'claimed' variable to true to indicate something was mentioned so we can increment
 		//the 'totalTweets' counter in our state
-		_.each(_self.state.symbols, function(symbol) {
-
+		for (symbolKey in _self.state.symbols) {
+			symbol = _self.state.symbols[symbolKey];
 			//for each symbol, we could be monitoring multiple tags, so loop through these also
-			_.each(symbol.tags, function(value, tag) {
+
+			for (tag in symbol.tags) {
 
 				reg = new RegExp('.*\\b' + tag.toLowerCase() + '\\b.*');
 
-				//do a regex match here so that we match the exact tag
+				// //do a regex match here so that we match the exact tag
 				if (tweet.text.match(reg) !== null) {
 					_self.updateSymbol(symbol, tag);
 
 					validTweet = true;
 				}
-			});
-		});
+			}
+		}
 
 		//if the tweet was claimed by at least one symbol
 		if (validTweet) {
