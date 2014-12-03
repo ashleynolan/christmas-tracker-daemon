@@ -247,7 +247,7 @@ var TwitterController = {
 		//SocketServer.sockets.emit('tweet', _self.state.symbols);
 
 		//emit our tweet to our client FE server
-		// SocketServer.client.emit('tweet', _self.state.symbols);
+		SocketServer.client.emit('tweet', _self.state.symbols);
 	},
 
 	//updates the states in the DB every x seconds
