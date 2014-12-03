@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 	_ = require('underscore'),
 	fs = require('fs'),
 	getenv = require('getenv'),
+	heapdump = require('heapdump'),
 
 	SocketServer = null,
 	Symbol = mongoose.model('Symbol'),
@@ -246,7 +247,7 @@ var TwitterController = {
 		//SocketServer.sockets.emit('tweet', _self.state.symbols);
 
 		//emit our tweet to our client FE server
-		SocketServer.client.emit('tweet', _self.state.symbols);
+		// SocketServer.client.emit('tweet', _self.state.symbols);
 	},
 
 	//updates the states in the DB every x seconds
@@ -257,6 +258,7 @@ var TwitterController = {
 
 	saveState : function () {
 		console.log('Starting Save process at ' + new Date());
+		// heapdump.writeSnapshot();
 		//save our states
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {

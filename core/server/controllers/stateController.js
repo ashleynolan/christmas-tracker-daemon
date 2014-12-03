@@ -220,7 +220,7 @@ exports.updateAllStates = function (globalState) {
 
 	return new Promise(function (resolve, reject) {
 
-		console.log('stateController: updateAllStates');
+		// console.log('stateController: updateAllStates');
 
 		var tagStates = []; //array to store requested promises
 
