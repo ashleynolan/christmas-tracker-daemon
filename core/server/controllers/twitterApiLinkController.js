@@ -23,7 +23,7 @@ var mongoose = require('mongoose'),
 	FAKE_TWITTER_CONNECTION = getenv.bool('FAKE_TWITTER_CONNECTION', false),
 	SAVE_TWEETS_TO_FILE = false,
 	SERVER_BACKOFF_TIME = 30000,
-	TEST_TWEET_TIMER = 50,
+	TEST_TWEET_TIMER = 10,
 	STATE_SAVE_DURATION = 600000,
 
 	_this = this;
@@ -47,6 +47,8 @@ var TwitterController = {
 		totalTweets : 0,
 		symbols : null
 	},
+
+	emitLimit : false,
 
 	historicState : {
 
@@ -263,11 +265,20 @@ var TwitterController = {
 
 	//we want to convert out state to an easier to read format for the javascript on the other side
 	emitState : function () {
-		//emit our tweet
-		//SocketServer.sockets.emit('tweet', _self.state.symbols);
 
+		//if we’ve hit our emit limit, return
+		if (_self.emitLimit === true) {
+			return;
+		}
+
+		_self.emitLimit = true;
 		//emit our tweet to our client FE server
 		SocketServer.client.emit('tweet', _self.state.symbols);
+
+		//reset emitLimiter after x ms
+		setTimeout(function () {
+			_self.emitLimit = false;
+		}, 50);
 	},
 
 	//updates the states in the DB every x seconds
