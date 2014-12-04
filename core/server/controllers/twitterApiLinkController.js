@@ -9,6 +9,8 @@ var mongoose = require('mongoose'),
 	_ = require('underscore'),
 	fs = require('fs'),
 	getenv = require('getenv'),
+
+	cronJob = require('cron').CronJob,
 	// heapdump = require('heapdump'),
 
 	SocketServer = null,
@@ -285,12 +287,13 @@ var TwitterController = {
 		.then(function (msg) {
 			console.log('State saved at ' + new Date());
 			console.log(msg);
-			SocketServer.client.emit('symbolState', _self.state); //emit new state for our front end to save in state
 
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
 				console.log('Clearing local state – switching to new day');
 				_self.getLocalStateFromServer(_self.createStream);
+			} else {
+				SocketServer.client.emit('symbolState', _self.state); //emit new state for our front end to save in state
 			}
 		});
 	},
@@ -306,6 +309,8 @@ var TwitterController = {
 				_self.state.symbols = symbolObject;
 
 				_self.tags = state.getTags(symbols);
+
+				SocketServer.client.emit('symbolState', _self.state); //emit new state for our front end to save in state
 
 				if (cb !== null)
 					cb();
@@ -334,11 +339,24 @@ var TwitterController = {
 				state.stateArrayToObject
 			);
 		});
-
 	}
 
-
 };
+
+//Reset everything on a new day!
+//We don't want to keep data around from the previous day so reset everything.
+// new cronJob('0 0 0 * * *', function(){
+//     //Reset the total
+//     watchList.total = 0;
+
+//     //Clear out everything in the map
+//     _.each(watchSymbols, function(v) { watchList.symbols[v] = 0; });
+
+//     //Send the update to the clients
+//     sockets.sockets.emit('data', watchList);
+// }, null, true);
+
+
 
 Array.prototype.has = function (value) {
 	return this.indexOf(value) > -1;
