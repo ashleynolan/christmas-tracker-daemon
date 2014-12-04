@@ -276,17 +276,21 @@ var TwitterController = {
 
 	saveState : function () {
 		console.log('Starting Save process at ' + new Date());
-		// heapdump.writeSnapshot();
+
+		//first destroy our stream – so we aren’t competing for CPU
+		_self.activeStream.destroy();
+
 		//save our states
 		state.updateAllStates(_self.state.symbols)
 		.then(function (msg) {
 			console.log('State saved at ' + new Date());
+			console.log(msg);
 			SocketServer.client.emit('symbolState', _self.state); //emit new state for our front end to save in state
 
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
 				console.log('Clearing local state – switching to new day');
-				_self.getLocalStateFromServer();
+				_self.getLocalStateFromServer(_self.createStream);
 			}
 		});
 	},
