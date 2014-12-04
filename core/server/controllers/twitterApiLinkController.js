@@ -144,10 +144,10 @@ var TwitterController = {
 		// Handle a disconnection
 		console.log("twitterAPILink :: Disconnection: ", response.statusCode);
 
-		_self.activeStream.destroy();
+		// _self.activeStream.destroy();
 
-		//try reconnecting to twitter in 30 seconds
-		setTimeout(_self.createStream, SERVER_BACKOFF_TIME);
+		//try reconnecting to twitter in 2 seconds to give db chance to save
+		setTimeout(_self.createStream, 2000);
 
 	},
 
@@ -280,7 +280,7 @@ var TwitterController = {
 		console.log('Starting Save process at ' + new Date());
 
 		//first destroy our stream – so we aren’t competing for CPU
-		// _self.activeStream.destroy();
+		_self.activeStream.destroy();
 
 		//save our states
 		state.updateAllStates(_self.state.symbols)
@@ -291,7 +291,7 @@ var TwitterController = {
 			//if we get a message to clear our local state, reload the state from the server
 			if (msg === 'Clear local server state') {
 				console.log('Clearing local state – switching to new day');
-				_self.getLocalStateFromServer();
+				_self.getLocalStateFromServer(_self.createStream);
 			} else {
 				SocketServer.client.emit('symbolState', _self.state); //emit new state for our front end to save in state
 			}
