@@ -238,6 +238,10 @@ var TwitterController = {
 				if (tweet.text.match(reg) !== null) {
 					_self.updateSymbol(symbol, tag);
 
+					_self.emitPartialState({
+						'symbol' : symbol,
+						'key' : symbolKey
+					});
 					validTweet = true;
 				}
 			}
@@ -248,7 +252,7 @@ var TwitterController = {
 			_self.state.total++;
 		}
 
-		_self.emitState();
+		//_self.emitState();
 
 	},
 
@@ -273,13 +277,35 @@ var TwitterController = {
 
 		_self.emitLimit = true;
 		//emit our tweet to our client FE server
-		SocketServer.client.emit('tweet', _self.state.symbols);
+		SocketServer.client.emit('state', _self.state.symbols);
+
+		//reset emitLimiter after x ms
+		setTimeout(function () {
+			_self.emitLimit = false;
+		}, 500);
+	},
+
+
+	//emit only the symbol that ahs changed
+	emitPartialState : function (symbolObj) {
+
+		//if we’ve hit our emit limit, return
+		if (_self.emitLimit === true) {
+			return;
+		}
+
+		_self.emitLimit = true;
+		//emit our tweet to our client FE server
+		SocketServer.client.emit('tweet', symbolObj);
 
 		//reset emitLimiter after x ms
 		setTimeout(function () {
 			_self.emitLimit = false;
 		}, 200);
+
 	},
+
+
 
 	//updates the states in the DB every x seconds
 	setupStateSaver : function () {
