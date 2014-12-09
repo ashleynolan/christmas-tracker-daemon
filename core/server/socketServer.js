@@ -47,6 +47,8 @@ var SocketServer = {
 		console.log('sending new state');
 		_self.client.emit('symbolState', twitter.state);
 
+		setTimeout(twitter.emitState, 10000);
+
 	}
 };
 

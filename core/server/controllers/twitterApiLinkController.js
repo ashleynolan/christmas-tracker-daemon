@@ -269,20 +269,8 @@ var TwitterController = {
 
 	//we want to convert out state to an easier to read format for the javascript on the other side
 	emitState : function () {
-
-		//if we’ve hit our emit limit, return
-		if (_self.emitLimit === true) {
-			return;
-		}
-
-		_self.emitLimit = true;
 		//emit our tweet to our client FE server
 		SocketServer.client.emit('state', _self.state.symbols);
-
-		//reset emitLimiter after x ms
-		setTimeout(function () {
-			_self.emitLimit = false;
-		}, 500);
 	},
 
 
@@ -301,7 +289,7 @@ var TwitterController = {
 		//reset emitLimiter after x ms
 		setTimeout(function () {
 			_self.emitLimit = false;
-		}, 200);
+		}, 100);
 
 	},
 
