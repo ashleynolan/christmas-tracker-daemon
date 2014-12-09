@@ -1,6 +1,8 @@
 
 
-var io = require('socket.io'),//socket.io - used for our websocket connection
+var io = require('socket.io')({
+		'transports': ['websocket']
+	}),//socket.io - used for our websocket connection
 
 	clientio  = require('socket.io-client'),
 
@@ -11,8 +13,6 @@ var SocketServer = {
 	client : null,
 
 	init : function (app, server, config) {
-
-		// global.io.set("transports",
 
 		//Start a Socket.IO listen
 		var socketServer = io.listen(server);
