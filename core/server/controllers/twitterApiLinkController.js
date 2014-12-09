@@ -278,7 +278,7 @@ var TwitterController = {
 		//reset emitLimiter after x ms
 		setTimeout(function () {
 			_self.emitLimit = false;
-		}, 50);
+		}, 200);
 	},
 
 	//updates the states in the DB every x seconds
