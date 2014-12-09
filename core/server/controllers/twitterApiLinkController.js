@@ -277,7 +277,7 @@ var TwitterController = {
 
 		_self.emitLimit = true;
 		//emit our tweet to our client FE server
-		//SocketServer.client.emit('state', _self.state.symbols);
+		SocketServer.client.emit('state', _self.state.symbols);
 
 		//reset emitLimiter after x ms
 		setTimeout(function () {
@@ -296,7 +296,7 @@ var TwitterController = {
 
 		_self.emitLimit = true;
 		//emit our tweet to our client FE server
-		//SocketServer.client.emit('tweet', symbolObj);
+		SocketServer.client.emit('tweet', symbolObj);
 
 		//reset emitLimiter after x ms
 		setTimeout(function () {
