@@ -14,7 +14,7 @@ var SocketServer = {
 
 		//Start a Socket.IO listen
 		var socketServer = io.listen(server);
-		_self.client = clientio.connect(config.clientURL, {transports: ["websocket"]});
+		_self.client = clientio.connect(config.clientURL);
 
 		//  ==================
 		//  === ON CONNECT ===
