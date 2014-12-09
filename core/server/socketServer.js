@@ -44,10 +44,8 @@ var SocketServer = {
 
 	emitCurrentState : function () {
 
-		console.log('sending new state');
 		_self.client.emit('symbolState', twitter.state);
-
-		setTimeout(twitter.emitState, 10000);
+		setInterval(twitter.emitState, 10000);
 
 	}
 };
