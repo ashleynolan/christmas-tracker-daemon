@@ -43,7 +43,7 @@ module.exports = {
 
 	prod: {
 		mode: 'production',
-		clientURL: 'http://christmas-tracker.herokuapp.com',
+		clientURL: 'https://christmas-tracker.herokuapp.com',
 		port: 3002,
 		app: {
 			name: 'Twitter vote counter - Prod'

@@ -12,6 +12,8 @@ var SocketServer = {
 
 	init : function (app, server, config) {
 
+		// global.io.set("transports",
+
 		//Start a Socket.IO listen
 		var socketServer = io.listen(server);
 		_self.client = clientio.connect(config.clientURL);
